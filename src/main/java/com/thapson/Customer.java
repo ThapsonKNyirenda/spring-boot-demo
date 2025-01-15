@@ -1,45 +1,55 @@
 package com.thapson;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
 public class Customer {
-    private int id;
-    private int age;
-    private String email;
-    private String name;
 
-    public Customer(int id, int age, String email, String name){
-        this.id=id;
-        this.age=age;
+    @Id
+    @SequenceGenerator(
+            name="customer_id_sequence",
+            sequenceName="customer_id_sequence"
+    )
+    @GeneratedValue(
+            strategy= GenerationType.SEQUENCE,
+            generator = "customer_id_sequence"
+    )
+
+    private Integer id;
+
+    private String name;
+    private String email;
+    private Integer age;
+    public Customer(Integer id, Integer age, String email, String name) {
+        this.id = id;
+        this.age = age;
         this.email = email;
-        this.name=name;
+        this.name = name;
     }
 
-    public int getId(){
+    public Customer() {
+
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id){
-        this.id=id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public int getAge(){
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age){
-        this.age=age;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name=name;
-    }
-
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
@@ -47,17 +57,25 @@ public class Customer {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return id == customer.id && age == customer.age && Objects.equals(name, customer.name);
+        return id == customer.id && age == customer.age && Objects.equals(email, customer.email) && Objects.equals(name, customer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, age, name);
+        return Objects.hash(id, age, email, name);
     }
 
     @Override
@@ -65,6 +83,7 @@ public class Customer {
         return "Customer{" +
                 "id=" + id +
                 ", age=" + age +
+                ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
