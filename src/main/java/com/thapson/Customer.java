@@ -5,11 +5,13 @@ import java.util.Objects;
 public class Customer {
     private int id;
     private int age;
+    private String email;
     private String name;
 
-    public Customer(int id, int age, String name){
+    public Customer(int id, int age, String email, String name){
         this.id=id;
         this.age=age;
+        this.email = email;
         this.name=name;
     }
 
@@ -35,6 +37,14 @@ public class Customer {
 
     public void setName(String name){
         this.name=name;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
